@@ -1,13 +1,18 @@
 remote_theme: "mmistakes/minimal-mistakes@4.20.2"
+
 plugins:
   - jekyll-include-cache
+
 title: "gentledev10's blog"
 subtitle: "Developer blog"
+
 name: &name "Jaemin Seo"
 description: "Blog for developers"
 logo: "/assets/images/site-logo.png"
+
 search: true
 search_full_content: true
+
 author:
   name     : *name
   avatar   : "/assets/images/author-photo.jpg"
@@ -20,3 +25,18 @@ author:
 
 include:
   - _pages
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      toc: true
+      toc_sticky: true
