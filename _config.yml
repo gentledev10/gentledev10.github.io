@@ -1,6 +1,14 @@
 remote_theme: "mmistakes/minimal-mistakes@4.20.2"
 
+# Plugins (previously gems:)
 plugins:
+  - jemoji
+  - jekyll-include-cache
+
+# mimic GitHub Pages with --safe
+whitelist:
+  - jekyll-gist
+  - jemoji
   - jekyll-include-cache
 
 title: "gentledev10's blog"

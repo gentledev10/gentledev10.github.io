@@ -1,5 +1,6 @@
 ---
 title: "Terraform 이란?"
+excerpt: "Terraform에 대해 알아보자"
 categories:
   - Terraform
 tags:
