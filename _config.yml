@@ -48,3 +48,8 @@ defaults:
       related: true
       toc: true
       toc_sticky: true
+
+comments:
+  provider : "disqus"
+  disqus:
+    shortname: "gentledev10-github-io"
