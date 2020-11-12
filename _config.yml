@@ -53,3 +53,9 @@ comments:
   provider : "disqus"
   disqus:
     shortname: "gentledev10-github-io"
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-8E7R4NHXY7"
+    anonymize_ip: false # default
