@@ -260,6 +260,7 @@ DEPENDENCIES
   github-pages
   jekyll-gist
   jekyll-include-cache
+  jekyll-sitemap
   jemoji
 
 BUNDLED WITH
