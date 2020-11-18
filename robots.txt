@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://gentledev10.github.io/sitemap.xml
