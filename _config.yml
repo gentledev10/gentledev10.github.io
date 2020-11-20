@@ -62,3 +62,7 @@ analytics:
   google:
     tracking_id: "G-8E7R4NHXY7"
     anonymize_ip: false # default
+
+# SEO Related
+google_site_verification: "psijgDLdFG4PmfBm6B0OvmChuR6a_m-5m9hozooECJQ"
+naver_site_verification: "baca2230ee227e1fbbddf53a4d440a0181d610b6"
