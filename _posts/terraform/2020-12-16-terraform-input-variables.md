@@ -1,0 +1,189 @@
+---
+title: "Terraform input variables"
+excerpt: "Input variables 를 사용해보자"
+categories:
+  - Terraform
+tags:
+  - Terraform
+  - Devops
+---
+
+# Input variables
+
+**Input variables** 란 모듈에 제공되는 변수이며, 모듈의 source code 의 변경 없이 모듈을 customize 할 수 있도록 해준다.  
+쉽게 생각해서 일반적인 프로그래밍을 생각한다면 함수에 전달되는 전달 인자라고 보면 될 것 같다.  
+
+## 선언 방법
+
+예제와 함께 선언 방법에 대해 알아보자.
+
+<script src="https://gist.github.com/gentledev10/50ccecad234ec9e5f2f29c0140701642.js"></script>
+
+위의 예제처럼 `variable` block 을 통해 Input variables 를 선언할 수 있고, `"iam_user_name"` 처럼 `variable` 의 이름을 지정 해 줄 수 있다.  
+variables 의 이름은 value 를 할당하거나 다른곳에서 참조를 할때 사용이 되며, 다른 variable 의 이름과 중복이 되어서는 안된다.  
+
+각각의 Arguments 에 대해서 알아보자.  
+모든 Arguments 는 optional 이므로 사용하지 않아도 문제는 없다.  
+
+- `default` - variable 의 default 값을 지정해줄때 사용된다.  
+variable 의 값을 지정해주지 않았을 경우 default 값이 사용되고,  
+default argument 를 사용하지 않는다면 해당 variable 의 값을 반드시 지정해줘야 한다.  
+
+- `type` - 값의 type 을 지정하여 해당 type 으로만 값의 할당을 제한하고자 할때 사용된다.  
+`string`, `number`, `bool` 을 기본으로 사용할 수 있고 `list`, `set`, `map`, `object`, `tuple` 도 사용이 가능하다.  
+`any` 도 사용이 가능한데 단어 그대로 어떤 type 의 값이든 할당이 가능하도록 하고자 할때 사용된다.  
+`any` type 을 사용하면 Terraform 이 알아서 적절한 type 으로 converting 을 해준다.  
+하지만 반드시 필요한 경우가 아니라면 `any` type 보다는 특정한 type 을 지정하여 값의 할당을 제한한다면 개발 과정에서 나올 수 있는 실수를 줄일 수 있으므로, 되도록 `any` type 의 사용은 지양하는 것이 좋을 것 같다.  
+`type` argument 를 사용하지 않는다면 `any` type 으로 사용되게 된다.  
+
+- `description` - variable 에 대해 설명을 추가하고자 할때 사용한다.
+
+- `validation` - `type` 을 통해 값의 type 을 제한할 수 있었다면, `validation` 은 조금 더 custom 하게 값을 제한할 수 있도록 도와준다.  
+`variable` block 내의 `validation` block 을 통해 생성할 수 있으며 `condition`, `error_message` 2개의 arguments 를 가진다.  
+value 가 `condition` 의 표현식을 통해 `true` 를 return 한다면 valid 한 값으로 사용할 수 있고, `false` 를 return 한다면 Terraform 에서 Error 를 발생시키고 `error_message` 를 개발자에게 보여준다.  
+
+위의 예제의 내용을 보며 파악해 보자.  
+`condition` 을 보면 `iam_user_name` 의 길이가 5자리 이상이어야 하고, `iam-` 으로 시작되어야 한다고 조건을 걸어 주었다.  
+입력받은 값이 이 조건을 `false` 로 return 한다면 아래의 `error_message`(IAM user name must be longer...) 를 보여주며 종료될 것이다.
+
+## 사용 방법
+
+`variable` 을 선언하는 방법을 알아봤으니 이번에는 어떻게 사용할 수 있는지에 대해서 알아보자.  
+variable 은 `var.<NAME>` 의 형식으로 사용이 가능하며 여기에서 `<NAME>` 은 variable 을 선언할때 함께 명시한 이름을 말한다.  
+variable 을 선언할때는 `variable` block 을 사용하지만, 사용을 위해서는 `variable` 이 아닌 `var` 를 사용하므로 헷갈리지 않길 바란다.  
+
+예제를 통해 다시한번 살펴보자.
+
+<script src="https://gist.github.com/gentledev10/b7bba1f6140b24f63757ec1f46b95171.js"></script>
+
+`variable` block 을 통해 `"iam_user_name"` 이름으로 생성된 variable 을 위와 같이 `var.iam_user_name` 으로 사용하여 IAM user 의 이름을 만들어 주고 있다.  
+이렇게 사용한다면 variable 의 값에 따라 코드 변경 없이 IAM user 의 이름을 쉽게 변경할 수 있다.  
+
+## 값 할당 방법
+
+선언, 사용 방법에 대해 알아봤으니 이번에는 값을 어떻게 할당하는지에 대해서 알아보자.  
+값을 할당하는 방법에는 여러가지가 있는데 아래의 예제를 가지고 한개씩 살펴보도록 하겠다.  
+
+<script src="https://gist.github.com/gentledev10/05661d18c69793eef884ed0a0fbeeb4e.js"></script>
+
+`iam_user_count`, `iam_user_name` 2 개의 variable 을 할당하고자 한다.  
+
+### Command Line 을 통한 할당
+
+Command Line 을 통해 값을 할당하는 방법에는 2가지가 있다.  
+
+첫번째는 `terraform plan` 또는 `terraform apply` 명령어를 옵션 없이 실행하는 경우인데 이럴경우 `deafult` 값이 할당된 variable 의 경우에는 default 값이 사용되고, `default` 값이 없는 variable 의 경우에는 아래 처럼 직접 값을 입력할 수 있다.  
+위의 예제를 가지고 `terraform apply` 을 실행해 보자.  
+
+```
+$ terraform apply
+var.iam_user_count
+  IAM user count
+
+  Enter a value: 2
+```
+
+`default` 값이 할당 된 `iam_user_name` variable 은 default 값을 사용하고 되고, `default` 값이 할당되지 않은 `iam_user_count` variable 은 위와 같이 입력을 해야 진행할 수 있다.  
+위와 같이 값을 입력하고 Enter 를 누르면 값이 할당되고 명령어가 수행된다.
+
+두번째는 `terraform plan` 또는 `terraform apply` 를 실행할때 `-var` 옵션을 통해 값을 할당하는 방법이다.  
+
+```
+$ terraform apply -var iam_user_count=2
+```
+
+`-var iam_user_count=2` 를 통해 `iam_user_count` variable 의 값을 `2` 로 할당해주었고, 따라서 IAM user 가 2개 생성될 것이다.  
+
+`-var` 를 여러번 사용해서 여러개의 variable 을 한번에 할당할 수 있다.  
+
+```
+$ terraform apply -var iam_user_count=2 -var iam_user_name="iam-test"
+```
+
+위의 명령어를 통해 `iam-test-0`, `iam-test-1` 이름을 가진 2개의 IAM user 가 생성될 것이다.
+
+### `.tfvars` 파일을 통한 할당
+
+`.tfvars` 또는 `.tfvars.json` 확장자를 가진 파일을 만들어 파일 내에 값들을 할당하고, 해당 파일을 Terraform 에 전달하여 값들을 할당할 수 있다.  
+*(Terraform 에 파일을 명시적으로 전달 시에는 꼭 확장자가 `.tfvars` 또는 `.tfvars.json` 일 필요는 없으나 Terraform 에서 정의해놓은 value 를 위한 표준 파일 확장자이므로 동일한 확장자를 사용하는 것이 좋다.)*  
+
+예제를 통해 파일을 사용하는 방법에 대해 알아보자.  
+
+아래와 같은 내용을 가진 `test.tfvars` 파일을 생성해보자.  
+`iam_user_count`, `iam_user_name` 2개의 variable 의 값을 할당해주고 있다.  
+
+<script src="https://gist.github.com/gentledev10/2088180814e69f6a995b42f1e917750d.js"></script>
+
+파일 생성 후 아래와 같이 `-var-file` 옵션을 통해 Terraform 명령어를 수행할 수 있다.
+
+```
+$ terraform apply -var-file="test.tfvars"
+```
+
+`test.tfvars` 파일을 전달하여 값을 할당해줬으므로, `iam-test-0`, `iam-test-1` 이름을 가진 2개의 IAM user 가 생성될 것이다.  
+
+variable 의 값 할당을 여러 파일에 나눠서 하는 것도 물론 가능하다.  
+아래와 같이 `test1.tfvars`, `test2.tfvars` 2개의 파일에 나눠서 값을 할당해보자.  
+
+<script src="https://gist.github.com/gentledev10/76bf1aa5ca5083a0143fa2402da83800.js"></script>
+
+파일 생성 후 아래와 같이 모든 파일을 전달해주면 위의 1개의 파일에서 할당했던 실행결과와 동일한 결과를 얻을 수 있다.  
+
+```
+$ terraform apply -var-file="test1.tfvars" -var-file="test2.tfvars"
+```
+
+이 경우는 variable 을 모듈별로 나눠서 관리하거나, custom 하게 grouping 을 하여 관리하고자 할때 유용한 방법이다.  
+
+그렇다면 매번 명령어를 수행할때마다 파일을 명시해줘야 할까??  
+**아니다!** Terraform 은 다음 2가지 규칙에 해당되는 파일이 있다면 자동으로 해당 파일을 가지고 값을 할당한다.  
+
+- 파일 이름이 `terraform.tfvars` 또는 `terraform.tfvars.json` 인 경우
+- 파일 이름이 `.auto.tfvars` 또는 `.auto.tfvars.json` 으로 끝나는 경우
+
+이 경우에 해당된다면 `-var-file` 옵션을 사용할 필요없이 단지 `terraform plan`, `terraform apply` 명령어만 입력하면 자동으로 파일을 읽어와서 값을 할당한다.  
+
+추가적으로 `.tfvars.json` 확장자를 가진 파일의 경우에는 아래와 같이 `JSON` 형식으로 값을 할당해주면 된다.  
+
+<script src="https://gist.github.com/gentledev10/5f4f969f1879538db6736aaecc43224e.js"></script>
+
+### 환경변수를 통한 할당
+
+variable 을 환경변수로 선언하여 값을 할당하는 방법도 가능하다.  
+`TF_VAR_` 로 시작해야하며 뒤에 variable 의 이름을 붙힌뒤 값을 할당할 수 있다.  
+위의 예제에서 사용한 `iam_user_count` variable 을 할당하고자 한다면, 아래와 같이 할 수 있다.  
+
+```
+$ export TF_VAR_iam_user_count=2
+$ terraform apply
+...
+```
+
+### 값 할당 순서
+
+위에서 값을 할당하는 다양한 방법들에 대해 살펴보았다.  
+만약 위의 나온 방법들을 모두 동시에 사용한다면 어떤 값이 최종적으로 사용될까??  
+Terraform 에서는 정해진 순서를 가지고 값을 읽고, 제일 마지막 순서로 정의된 값을 최종적으로 사용한다.  
+
+우선 값을 읽는 순서에 대해 살펴보자.
+
+1. 환경변수
+2. `terraform.tfvars` 파일
+3. `terraform.tfvars.json` 파일
+4. `*.auto.tfvars` 또는 `*.auto.tfvars.json` 파일중 사전식 순서대로  
+5. Command Line 의 `-var` 또는 `-var-file` 옵션을 명시된 순서대로
+
+Terraform 은 위의 순서대로 값을 읽으며 값은 계속 Overwrite 되므로 가장 마지막에 나온 값이 사용되게 된다.  
+예를 들어 동일한 variable 값이 환경변수, `terraform.tfvars` 에 동시에 할당되어 있다면 마지막에 읽은 값인 `terraform.tfvars` 에 있는 값으로 할당이 된다.  
+`*.auto.tfvars` 또는 `*.auto.tfvars.json` 파일이 여러개인 경우에는 사전식 순서대로 값을 읽게되어 동일한 variable이 있다면 가장 사전식 순서가 늦은 파일의 값이 사용된다.  
+Command Line 옵션을 사용하는 경우에도 마찬가지로 값은 명령어의 정의된 제일 마지막 순서의 값이 사용된다.  
+
+한가지 헷갈리지 말아야할건 마지막으로 읽은 파일의 값만 사용하는 것이 아니라 값을 읽는 순서대로 계속 값을 Overwrite 한다는 것이다.  
+만약 `a.auto.tfvars` 에 `A` 라는 variable 의 값이, `b.auto.tfvars` 에 `B` 라는 varialbe 의 값이 있다면,  
+`b.auto.tfvars` 파일만 사용해서 값을 할당하는게 아니라 `a.auto.tfvars` 에서 `A` 값을 할당하고, `b.auto.tfvars` 에서는 `A` 값이 없으므로 `B` 값만 할당해서 결국 `A`, `B` 모두 할당이 되는 것이다.  
+
+<br>
+<br>
+지금까지 **Input variables**에 대하여 살펴보았다.  
+Infrastructure 를 code 로 관리할때 가장 좋은 장점 중 하나가 한번 작성한 code 로 재활용이 가능 하다는 점이다.  
+물론 동일한 코드를 완전히 그대로 사용하여 새로운 infrastructure 를 구성하는 경우도 있겠지만, 조금씩 다른 설정으로 infrastructure 를 생성하는 경우도 굉장히 많으므로 적재 적소에 Input variables 를 잘 사용하여 조금 더 쉽게 재활용이 가능한 코드를 작성하는 것이 중요하다.
