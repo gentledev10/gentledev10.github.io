@@ -94,4 +94,10 @@ filter {
 <br>
 <br>
 지금까지 **Data sources**에 대하여 살펴보았다.  
-`resource` 와 함께 Terraform 의 필수 요소 중 하나이며, 잘 사용한다면 더욱 안정적인 Infrastructure as Code 를 경험할 것이다.
+`resource` 와 함께 Terraform 의 필수 요소 중 하나이며, 잘 사용한다면 더욱 안정적인 Infrastructure as Code 를 경험할 것이다.  
+
+<br>
+<br>
+**[참고]**  
+
+<https://www.terraform.io/docs/configuration/data-sources.html>{:target="_blank"}

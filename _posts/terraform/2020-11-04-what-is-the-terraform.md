@@ -24,7 +24,7 @@ IaC 방식을 사용하지 않는다면, AWS console 에 접속해서 EC2 서비
 자 그럼 이제 Terraform에 대해 알아보자.  
 Terraform 이란 code 를 통해 infrastructure 를 구성하고 관리할 수 있도록 해주는 open source tool 이다.  
 기본적으로 HashiCorp Configuration Language (HCL) 을 사용하여 code 를 작성할 수 있으며 json 으로도 가능하다.  
-(심지어 최근에는 python, typescript 로도 가능하다! [참고 site](https://www.hashicorp.com/blog/cdk-for-terraform-enabling-python-and-typescript-support))  
+(심지어 최근에는 python, typescript 로도 가능하다! [참고 site](https://www.hashicorp.com/blog/cdk-for-terraform-enabling-python-and-typescript-support){:target="_blank"})  
 작성된 code를 통해 infrastructure resource 들을 생성, 변경, 삭제가 가능하다.
 
 그렇다면 Terraform 을 사용해서 얻게되는 장점은 무엇일까?  

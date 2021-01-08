@@ -122,4 +122,10 @@ resource documentation 에 list 가 나와있으며, Arguments 와 동일하게 
 <br>
 <br>
 지금까지 **resource** 를 code 로 작성하는 방법에 대해 알아보았다.
-다음 포스트에서는 resource 2탄으로 **Meta-Arguments** 에 대해 알아보겠다.
+다음 포스트에서는 resource 2탄으로 **Meta-Arguments** 에 대해 알아보겠다.  
+
+<br>
+<br>
+**[참고]**  
+
+<https://www.terraform.io/docs/configuration/blocks/resources/syntax.html>{:target="_blank"}  

@@ -152,4 +152,14 @@ Terraform 을 사용하여 infrastructure 구축 시 terraform 은 실제 적용
 <br>
 <br>
 지금까지 ***Meta-arguments*** 에 대해 살펴보았다.  
-***Meta-argunemts*** 는 모든 `resource` block 에서 사용이 가능하다는 걸 기억하고, 필요한 곳에 사용하여 더 안정적인 resource 운영에 도움이 되길 바란다!
+***Meta-argunemts*** 는 모든 `resource` block 에서 사용이 가능하다는 걸 기억하고, 필요한 곳에 사용하여 더 안정적인 resource 운영에 도움이 되길 바란다!  
+
+<br>
+<br>
+**[참고]**  
+
+<https://www.terraform.io/docs/configuration/meta-arguments/depends_on.html>{:target="_blank"}  
+<https://www.terraform.io/docs/configuration/meta-arguments/count.html>{:target="_blank"}  
+<https://www.terraform.io/docs/configuration/meta-arguments/for_each.html>{:target="_blank"}  
+<https://www.terraform.io/docs/configuration/meta-arguments/resource-provider.html>{:target="_blank"}  
+<https://www.terraform.io/docs/configuration/meta-arguments/lifecycle.html>{:target="_blank"}

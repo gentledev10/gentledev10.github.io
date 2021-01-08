@@ -239,4 +239,4 @@ AWS console 에 들어가서 확인해봐도 해당 resource 가 삭제된 걸 �
 지금까지 Terraform 의 install 방법과 주요 command 에 대해 살펴봤다.  
 물론 Terraform 은 더 많은 command 들을 사용할 수 있지만, 오늘 살펴본 4개의 command 만으로도 Terraform 으로 infrastructure 를 구축하는데 문제가 없기에 4가지의 command 만 살펴보았다.  
 혹시 더 많은 command 가 궁금하다면, <https://www.terraform.io/docs/commands/index.html>{:target="_blank"} 여기를 확인해 보기 바란다.  
-추후 더 많은 command 를 다루는 post 를 올려보도록 하겠다.
+추후 더 많은 command 를 다루는 post 를 올려보도록 하겠다.  

@@ -186,4 +186,10 @@ Command Line 옵션을 사용하는 경우에도 마찬가지로 값은 명령�
 <br>
 지금까지 **Input variables**에 대하여 살펴보았다.  
 Infrastructure 를 code 로 관리할때 가장 좋은 장점 중 하나가 한번 작성한 code 로 재활용이 가능 하다는 점이다.  
-물론 동일한 코드를 완전히 그대로 사용하여 새로운 infrastructure 를 구성하는 경우도 있겠지만, 조금씩 다른 설정으로 infrastructure 를 생성하는 경우도 굉장히 많으므로 적재 적소에 Input variables 를 잘 사용하여 조금 더 쉽게 재활용이 가능한 코드를 작성하는 것이 중요하다.
+물론 동일한 코드를 완전히 그대로 사용하여 새로운 infrastructure 를 구성하는 경우도 있겠지만, 조금씩 다른 설정으로 infrastructure 를 생성하는 경우도 굉장히 많으므로 적재 적소에 Input variables 를 잘 사용하여 조금 더 쉽게 재활용이 가능한 코드를 작성하는 것이 중요하다.  
+
+<br>
+<br>
+**[참고]**  
+
+<https://www.terraform.io/docs/configuration/variables.html>{:target="_blank"}

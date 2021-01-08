@@ -166,4 +166,11 @@ Provider 는 해당 폴더의 `.terraform` 폴더가 생성되어 여기에 inst
 <br>
 <br>
 자! 지금까지 AWS Provider 를 설정하고 install 하는 방법에 대해 확인해봤다.  
-다음 post 에서는 실제로 infrastructure 를 구성하는 `resource` 에 대해 확인해 보겠다.
+다음 post 에서는 실제로 infrastructure 를 구성하는 `resource` 에 대해 확인해 보겠다.  
+
+<br>
+<br>
+**[참고]**  
+
+<https://www.terraform.io/docs/configuration/provider-requirements.html>{:target="_blank"}  
+<https://www.terraform.io/docs/configuration/providers.html>{:target="_blank"}  
