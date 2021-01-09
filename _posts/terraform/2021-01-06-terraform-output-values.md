@@ -1,6 +1,6 @@
 ---
-title: "Terraform output variables"
-excerpt: "Output variables 를 사용해보자"
+title: "Terraform output values"
+excerpt: "Output values 를 사용해보자"
 categories:
   - Terraform
 tags:
@@ -8,9 +8,9 @@ tags:
   - Devops
 ---
 
-# Output variables
+# Output values
 
-**Output variables** 란 모듈에서 제공하는 값이며, 다른 모듈에서 그 값을 다양하게 사용하여 Infrastructure 구성에 도움을 준다.  
+**Output values** 란 모듈에서 제공하는 값이며, 다른 모듈에서 그 값을 다양하게 사용하여 Infrastructure 구성에 도움을 준다.  
 모듈의 return value 라고 생각하면 쉬울 것 같다.  
 
 ## 선언 방법
@@ -19,7 +19,7 @@ tags:
 
 <script src="https://gist.github.com/gentledev10/37f814311d41bf9729b2ac71c40bbdb2.js"></script>
 
-Output variables 는 보통 `outputs.tf` 파일을 생성하여 선언하며 (물론 파일 이름은 개발자 자유이다) `output` block 을 통해 생성할 수 있다.  
+Output values 는 보통 `outputs.tf` 파일을 생성하여 선언하며 (물론 파일 이름은 개발자 자유이다) `output` block 을 통해 생성할 수 있다.  
 output 의 이름은 다른 것들과 마찬가지로 다른 output 의 이름과 중복 되어서는 안된다.  
 
 사용할 수 있는 Arguments 에 대해서 살펴보자.  
