@@ -33,6 +33,12 @@ author:
     - label: "GitHub"
       icon : "fab fa-fw fa-github"
       url  : "https://github.com/gentledev10"
+    - label: "Linkedin"
+      icon : "fab fa-fw fa-linkedin"
+      url  : "https://www.linkedin.com/in/jaemin-seo-82799a165/"
+    - label: "Email"
+      icon : "far fa-fw fa-envelope"
+      url  : mailto:86sjmjm@gmail.com
 
 include:
   - _pages
