@@ -13,3 +13,9 @@ html {
         font-size: 18px;
     }
 }
+
+// Remove google adesense bottom line
+// https://github.com/mmistakes/minimal-mistakes/issues/306 */
+ins.adsbygoogle {
+  border-bottom: none !important;
+}
